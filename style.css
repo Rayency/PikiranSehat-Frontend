@@ -1,0 +1,423 @@
+/* Custom Tailwind Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth transitions */
+a, button, input, select, textarea {
+    transition: all 0.3s ease;
+}
+
+/* Form inputs styling */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select,
+textarea {
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+/* Radio button styling */
+input[type="radio"] {
+    cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+    font-weight: 600;
+}
+
+/* Button hover effects */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.125rem;
+    }
+}
+
+/* Animation for result card */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-card {
+    animation: slideUp 0.5s ease;
+}
+
+/* Gradient backgrounds */
+.bg-gradient-indigo {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.bg-gradient-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* Loading animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Success checkmark animation */
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 166;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.animate-checkmark {
+    animation: checkmark 0.6s ease-out;
+}
+
+/* Accessibility improvements */
+.focus-visible:focus {
+    outline: 2px solid #4f46e5;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    nav {
+        display: none;
+    }
+    
+    footer {
+        display: none;
+    }
+    
+    .no-print {
+        display: none;
+    }
+}
+
+/* Scrollbar styling (Webkit browsers) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ===== HOME PAGE BACKGROUND ===== */
+
+.home-background {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #a78bfa, #fbcfe8, #f5d0fe);
+    background-size: 300% 300%;
+    animation: gradientMove 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animasi Background bergerak halus */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Box card di bagian tengah */
+.home-box {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    animation: slideUp 0.6s ease-out;
+}
+
+.animated-gradient {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #f9c5ff, #c9a7ff, #a5d8ff, #ffd6e0);
+    background-size: 400% 400%;
+    animation: gradientFlow 10s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ---- Animated Gradient Background ---- */
+.animated-gradient {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #d8b4fe, #fbcfe8, #a5d8ff, #ffd6e0);
+    background-size: 400% 400%;
+    animation: gradientFlow 12s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Fade In for main intro text */
+@keyframes fadeInAnimation {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn {
+    animation: fadeInAnimation 1.2s ease forwards;
+}
+
+/* Floating Icons */
+@keyframes floatIcon {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0); }
+}
+.animate-floatIcon { animation: floatIcon 5s ease-in-out infinite; }
+.animate-floatIconDelay1 { animation: floatIcon 6s ease-in-out infinite 1s; }
+.animate-floatIconDelay2 { animation: floatIcon 7s ease-in-out infinite 2s; }
+
+/* Slow floating background shape */
+@keyframes slowFloat {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-25px) scale(1.05); }
+    100% { transform: translateY(0) scale(1); }
+}
+.animate-slowFloat {
+    animation: slowFloat 6s ease-in-out infinite;
+}
+
+/* Soft particles */
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    opacity: 0.45;
+    border-radius: 50%;
+    animation: particleSoft 8s ease-in-out infinite;
+}
+@keyframes particleSoft {
+    0% { transform: translateY(0) scale(1); opacity: 0.2; }
+    50% { transform: translateY(-40px) scale(1.3); opacity: 0.5; }
+    100% { transform: translateY(0) scale(1); opacity: 0.2; }
+}
+
+/* =========================================
+   SUPER AESTHETIC PREDICT BACKGROUND
+   ========================================= */
+
+.predict-background {
+    min-height: 100vh;
+    background: linear-gradient(
+        120deg,
+        #f8d7ff,
+        #ffe5f7,
+        #e4d4ff,
+        #ffecf2
+    );
+    background-size: 400% 400%;
+    animation: moveGradient 12s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated gradient */
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Soft blur shapes */
+.predict-background::before {
+    content: "";
+    position: absolute;
+    top: -140px;
+    left: -100px;
+    width: 420px;
+    height: 420px;
+    background: #ffffff60;
+    filter: blur(100px);
+    border-radius: 50%;
+}
+
+.predict-background::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: #ffffff50;
+    filter: blur(130px);
+    border-radius: 50%;
+}
+
+/* Floating particles */
+.predict-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    opacity: 0.45;
+    border-radius: 50%;
+    animation: particleFloat 10s ease-in-out infinite;
+}
+@keyframes particleFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-45px); }
+    100% { transform: translateY(0); }
+}
+
+/* Floating mascot */
+.floating-mascot {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 120px;
+    opacity: 0.85;
+    animation: mascotFloat 6s ease-in-out infinite;
+}
+@keyframes mascotFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+/* Form card upgrade */
+.predict-card {
+    background: #ffffffd8;
+    backdrop-filter: blur(20px);
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.10),
+        0 0 40px rgba(255,255,255,0.3);
+    animation: cardPop 0.8s ease-out;
+}
+@keyframes cardPop {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glow on hover */
+.predict-card:hover {
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.15),
+        0 0 55px rgba(255,255,255,0.5);
+    transform: scale(1.01);
+    transition: 0.3s;
+}
+
+/* FIX: allow scrolling on predict page */
+.predict-background {
+    min-height: auto !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Floating mascot and particles must not block scroll */
+.floating-mascot,
+.predict-particle {
+    pointer-events: none !important;
+}
+
+/* Maskot floating untuk intro */
+.intro-mascot {
+    width: 280px;
+    margin-bottom: 20px;
+    animation: introMascotFloat 4s ease-in-out infinite;
+    opacity: 0;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes introMascotFloat {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { transform: translateY(-12px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+}
