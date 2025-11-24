@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Kesehatan Mental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="predict-background">
+<!-- Floating Mascot -->
+<img src="/static/maskot.png"
+     class="floating-mascot"
+     alt="maskot">
+
+<!-- Soft floating particles -->
+<div class="predict-particle" style="top:10%; left:15%; animation-delay:0s;"></div>
+<div class="predict-particle" style="top:40%; left:70%; animation-delay:1s;"></div>
+<div class="predict-particle" style="top:75%; left:30%; animation-delay:2s;"></div>
+<div class="predict-particle" style="top:20%; left:85%; animation-delay:3s;"></div>
+
+    <!-- Navigation - Sticky -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl sm:text-2xl font-bold text-indigo-600">PikiranSehat</h1>
+                <div class="flex gap-2 sm:gap-3">
+                    <a href="/" class="bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm sm:text-base font-semibold">Home</a>
+                    <a href="/predict" class="bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm sm:text-base font-semibold">Prediksi</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Form Prediksi Kesehatan Mental</h2>
+            <p class="text-gray-600 mb-8">Silakan isi semua pertanyaan dengan jujur untuk hasil prediksi yang akurat</p>
+
+            <form id="predictionForm" action="/predict" method="POST" class="space-y-8">
+                <!-- Section 1: Informasi Pribadi -->
+                <div class="border-b pb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
+                        Informasi Pribadi
+                    </h3>
+
+                    <!-- Nama -->
+                    <div class="mb-6">
+                        <label for="nama" class="block text-gray-700 font-semibold mb-2">
+                            Nama Mahasiswa <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="nama" 
+                            name="nama" 
+                            placeholder="Masukkan nama lengkap" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200"
+                        >
+                    </div>
+
+                    <!-- Jenis Kelamin -->
+                    <div class="mb-6">
+                        <label for="jenis_kelamin" class="block text-gray-700 font-semibold mb-2">
+                            Jenis Kelamin <span class="text-red-500">*</span>
+                        </label>
+                        <select 
+                            id="jenis_kelamin" 
+                            name="jenis_kelamin" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200"
+                        >
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="0">Laki-laki</option>
+                            <option value="1">Perempuan</option>
+                        </select>
+                    </div>
+
+                    <!-- Usia -->
+                    <div class="mb-6">
+                        <label for="usia" class="block text-gray-700 font-semibold mb-2">
+                            Usia (tahun) <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="usia" 
+                            name="usia" 
+                            min="15" 
+                            max="50" 
+                            placeholder="Masukkan usia Anda" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200"
+                        >
+                    </div>
+                </div>
+
+                <!-- Section 2: Kehidupan Akademik -->
+                <div class="border-b pb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
+                        Kehidupan Akademik
+                    </h3>
+
+                    <!-- Tekanan Akademik -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            Seberapa besar tingkat tekanan akademik Anda? <span class="text-red-500">*</span>
+                        </label>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="tekanan_1" name="tekanan_akademik" value="1" required class="w-4 h-4 text-indigo-600">
+                                <label for="tekanan_1" class="ml-2 text-sm text-gray-700">1<span class="hidden sm:inline">: Sangat Rendah</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="tekanan_2" name="tekanan_akademik" value="2" class="w-4 h-4 text-indigo-600">
+                                <label for="tekanan_2" class="ml-2 text-sm text-gray-700">2<span class="hidden sm:inline">: Rendah</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="tekanan_3" name="tekanan_akademik" value="3" class="w-4 h-4 text-indigo-600">
+                                <label for="tekanan_3" class="ml-2 text-sm text-gray-700">3<span class="hidden sm:inline">: Sedang</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="tekanan_4" name="tekanan_akademik" value="4" class="w-4 h-4 text-indigo-600">
+                                <label for="tekanan_4" class="ml-2 text-sm text-gray-700">4<span class="hidden sm:inline">: Tinggi</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="tekanan_5" name="tekanan_akademik" value="5" class="w-4 h-4 text-indigo-600">
+                                <label for="tekanan_5" class="ml-2 text-sm text-gray-700">5<span class="hidden sm:inline">: Sangat Tinggi</span></label>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">1 = Sangat Rendah | 5 = Sangat Tinggi</p>
+                    </div>
+
+                    <!-- Kepuasan Belajar -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            Seberapa puas Anda dengan proses belajar? <span class="text-red-500">*</span>
+                        </label>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="kepuasan_1" name="kepuasan_belajar" value="1" required class="w-4 h-4 text-indigo-600">
+                                <label for="kepuasan_1" class="ml-2 text-sm text-gray-700">1<span class="hidden sm:inline">: Sangat Tidak Puas</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="kepuasan_2" name="kepuasan_belajar" value="2" class="w-4 h-4 text-indigo-600">
+                                <label for="kepuasan_2" class="ml-2 text-sm text-gray-700">2<span class="hidden sm:inline">: Tidak Puas</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="kepuasan_3" name="kepuasan_belajar" value="3" class="w-4 h-4 text-indigo-600">
+                                <label for="kepuasan_3" class="ml-2 text-sm text-gray-700">3<span class="hidden sm:inline">: Cukup Puas</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="kepuasan_4" name="kepuasan_belajar" value="4" class="w-4 h-4 text-indigo-600">
+                                <label for="kepuasan_4" class="ml-2 text-sm text-gray-700">4<span class="hidden sm:inline">: Puas</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="kepuasan_5" name="kepuasan_belajar" value="5" class="w-4 h-4 text-indigo-600">
+                                <label for="kepuasan_5" class="ml-2 text-sm text-gray-700">5<span class="hidden sm:inline">: Sangat Puas</span></label>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">1 = Sangat Tidak Puas | 5 = Sangat Puas</p>
+                    </div>
+
+                    <!-- Jam Belajar Harian -->
+                    <div class="mb-6">
+                        <label for="jam_belajar" class="block text-gray-700 font-semibold mb-2">
+                            Rata-rata jam belajar per hari (jam) <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="jam_belajar" 
+                            name="jam_belajar" 
+                            min="0" 
+                            max="24" 
+                            step="0.5"
+                            placeholder="Contoh: 5 jam" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200"
+                        >
+                    </div>
+                </div>
+
+                <!-- Section 3: Gaya Hidup -->
+                <div class="border-b pb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">3</span>
+                        Gaya Hidup
+                    </h3>
+
+                    <!-- Durasi Tidur -->
+                    <div class="mb-6">
+                        <label for="durasi_tidur" class="block text-gray-700 font-semibold mb-2">
+                            Durasi tidur per hari (jam) <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="durasi_tidur" 
+                            name="durasi_tidur" 
+                            min="0" 
+                            max="24" 
+                            step="0.5"
+                            placeholder="Contoh: 7 jam" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200"
+                        >
+                    </div>
+
+                    <!-- Kualitas Pola Makan -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            Bagaimana kualitas pola makan Anda? <span class="text-red-500">*</span>
+                        </label>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="makan_1" name="kualitas_pola_makan" value="1" required class="w-4 h-4 text-indigo-600">
+                                <label for="makan_1" class="ml-2 text-sm text-gray-700">1<span class="hidden sm:inline">: Sangat Buruk</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="makan_2" name="kualitas_pola_makan" value="2" class="w-4 h-4 text-indigo-600">
+                                <label for="makan_2" class="ml-2 text-sm text-gray-700">2<span class="hidden sm:inline">: Buruk</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="makan_3" name="kualitas_pola_makan" value="3" class="w-4 h-4 text-indigo-600">
+                                <label for="makan_3" class="ml-2 text-sm text-gray-700">3<span class="hidden sm:inline">: Cukup</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="makan_4" name="kualitas_pola_makan" value="4" class="w-4 h-4 text-indigo-600">
+                                <label for="makan_4" class="ml-2 text-sm text-gray-700">4<span class="hidden sm:inline">: Baik</span></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="makan_5" name="kualitas_pola_makan" value="5" class="w-4 h-4 text-indigo-600">
+                                <label for="makan_5" class="ml-2 text-sm text-gray-700">5<span class="hidden sm:inline">: Sangat Baik</span></label>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">1 = Sangat Buruk | 5 = Sangat Baik</p>
+                    </div>
+                </div>
+
+                <!-- Section 4: Kesehatan Mental -->
+                <div class="pb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">4</span>
+                        Kesehatan Mental
+                    </h3>
+
+                    <!-- Pikiran Bunuh Diri -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            Pernahkah Anda memiliki pikiran bunuh diri? <span class="text-red-500">*</span>
+                        </label>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="bunuh_diri_0" name="pikiran_bunuh_diri" value="0" required class="w-4 h-4 text-indigo-600">
+                                <label for="bunuh_diri_0" class="ml-3 text-gray-700">Tidak</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="bunuh_diri_1" name="pikiran_bunuh_diri" value="1" class="w-4 h-4 text-indigo-600">
+                                <label for="bunuh_diri_1" class="ml-3 text-gray-700">Ya</label>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Jika ya, silakan hubungi profesional kesehatan mental segera.</p>
+                    </div>
+
+                    <!-- Stres Finansial -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            Apakah Anda mengalami stres finansial? <span class="text-red-500">*</span>
+                        </label>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="stres_finansial_0" name="stres_finansial" value="0" required class="w-4 h-4 text-indigo-600">
+                                <label for="stres_finansial_0" class="ml-3 text-gray-700">Tidak</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="stres_finansial_1" name="stres_finansial" value="1" class="w-4 h-4 text-indigo-600">
+                                <label for="stres_finansial_1" class="ml-3 text-gray-700">Ya</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Riwayat Gangguan Mental -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            Apakah ada riwayat gangguan mental di keluarga Anda? <span class="text-red-500">*</span>
+                        </label>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="riwayat_0" name="riwayat_gangguan_mental" value="0" required class="w-4 h-4 text-indigo-600">
+                                <label for="riwayat_0" class="ml-3 text-gray-700">Tidak</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="riwayat_1" name="riwayat_gangguan_mental" value="1" class="w-4 h-4 text-indigo-600">
+                                <label for="riwayat_1" class="ml-3 text-gray-700">Ya</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex space-x-4">
+                    <button 
+                        type="submit" 
+                        class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition transform hover:scale-105 shadow-lg"
+                    >
+                        Lihat Prediksi 🔮
+                    </button>
+                    <button 
+                        type="reset" 
+                        class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-lg transition"
+                    >
+                        Reset Form
+                    </button>
+                </div>
+            </form>
+
+            <!-- Warning -->
+            <div class="mt-8 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
+                <p class="text-yellow-800 text-sm">
+                    <strong>⚠️ Catatan:</strong> Jawab semua pertanyaan dengan jujur dan akurat untuk hasil prediksi yang lebih baik. 
+                    Website ini bukan pengganti konsultasi profesional kesehatan mental.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Form validation
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            // Check all required fields
+            const nama = document.getElementById('nama').value.trim();
+            const jenis_kelamin = document.getElementById('jenis_kelamin').value;
+            const usia = document.getElementById('usia').value;
+            const jam_belajar = document.getElementById('jam_belajar').value;
+            const durasi_tidur = document.getElementById('durasi_tidur').value;
+
+            if (!nama) {
+                alert('Silakan masukkan nama Anda');
+                e.preventDefault();
+                return;
+            }
+
+            if (usia < 15 || usia > 50) {
+                alert('Usia harus antara 15-50 tahun');
+                e.preventDefault();
+                return;
+            }
+
+            if (jam_belajar < 0) {
+                alert('Jam belajar tidak boleh negatif');
+                e.preventDefault();
+                return;
+            }
+
+            if (durasi_tidur < 0 || durasi_tidur > 24) {
+                alert('Durasi tidur harus antara 0-24 jam');
+                e.preventDefault();
+                return;
+            }
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

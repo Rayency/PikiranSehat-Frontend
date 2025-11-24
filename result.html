@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Prediksi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation - Sticky -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl sm:text-2xl font-bold text-indigo-600">PikiranSehat</h1>
+                <div class="flex gap-2 sm:gap-3">
+                    <a href="/" class="bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm sm:text-base font-semibold">Home</a>
+                    <a href="/predict" class="bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm sm:text-base font-semibold">Prediksi</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Result Card -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Header with Status -->
+            <div class="bg-gradient-to-r {% if prediction == 0 %}from-green-500 to-green-600{% else %}from-red-500 to-red-600{% endif %} text-white p-8">
+                <h2 class="text-3xl font-bold mb-2">Hasil Prediksi Kesehatan Mental</h2>
+                <p class="text-lg opacity-90">Status kesehatan mental Anda berdasarkan data yang diinputkan</p>
+            </div>
+
+            <!-- Main Result -->
+            <div class="p-8">
+                <!-- Student Info -->
+                <div class="mb-8 p-6 bg-gray-50 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Informasi Mahasiswa</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-gray-600 text-sm">Nama</p>
+                            <p class="text-xl font-semibold text-gray-800">{{ nama }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Jenis Kelamin</p>
+                            <p class="text-xl font-semibold text-gray-800">{% if jenis_kelamin == '0' %}Laki-laki{% else %}Perempuan{% endif %}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Usia</p>
+                            <p class="text-xl font-semibold text-gray-800">{{ usia }} tahun</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prediction Result Box -->
+                <div class="mb-8 p-8 rounded-lg {% if prediction == 0 %}bg-green-50 border-2 border-green-300{% else %}bg-red-50 border-2 border-red-300{% endif %}">
+                    <div class="flex items-start mb-4">
+                        <span class="text-4xl mr-4">{% if prediction == 0 %}😊{% else %}😟{% endif %}</span>
+                        <div>
+                            <h3 class="text-2xl font-bold {% if prediction == 0 %}text-green-700{% else %}text-red-700{% endif %} mb-2">
+                                Status: {% if prediction == 0 %}Sehat / Normal{% else %}Depresi{% endif %}
+                            </h3>
+                            <p class="{% if prediction == 0 %}text-green-700{% else %}text-red-700{% endif %} font-semibold">
+                                {% if prediction == 0 %}✓ Kesehatan mental Anda dalam kondisi baik{% else %}⚠️ Indikasi gangguan depresi terdeteksi{% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Explanation -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">📋 Penjelasan Hasil</h3>
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500 mb-4">
+                        <p class="text-gray-700 leading-relaxed">
+                            {% if prediction == 0 %}
+                            Berdasarkan data yang Anda inputkan, kesehatan mental Anda dalam kondisi yang baik. 
+                            Ini menunjukkan bahwa Anda memiliki keseimbangan yang cukup baik antara kehidupan akademik, 
+                            gaya hidup, dan kesehatan mental. Lanjutkan dengan menjaga pola tidur yang cukup, pola makan 
+                            yang sehat, dan mengelola stres dengan baik.
+                            {% else %}
+                            Berdasarkan data yang Anda inputkan, terdapat indikasi gangguan depresi yang terdeteksi. 
+                            Hasil ini menunjukkan bahwa Anda mungkin mengalami beban emosional atau stres yang signifikan. 
+                            Penting untuk segera berkonsultasi dengan profesional kesehatan mental atau psikolog untuk 
+                            mendapatkan diagnosis dan dukungan yang tepat.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Factor Analysis -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">📊 Faktor-Faktor yang Dinilai</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Tekanan Akademik</p>
+                            <p class="text-lg font-semibold text-gray-800">{{ tekanan_akademik }}/5</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Kepuasan Belajar</p>
+                            <p class="text-lg font-semibold text-gray-800">{{ kepuasan_belajar }}/5</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Durasi Tidur</p>
+                            <p class="text-lg font-semibold text-gray-800">{{ durasi_tidur }} jam/hari</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Kualitas Pola Makan</p>
+                            <p class="text-lg font-semibold text-gray-800">{{ kualitas_pola_makan }}/5</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Jam Belajar Harian</p>
+                            <p class="text-lg font-semibold text-gray-800">{{ jam_belajar }} jam</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Pikiran Bunuh Diri</p>
+                            <p class="text-lg font-semibold text-gray-800">{% if pikiran_bunuh_diri == '0' %}Tidak{% else %}Ya{% endif %}</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Stres Finansial</p>
+                            <p class="text-lg font-semibold text-gray-800">{% if stres_finansial == '0' %}Tidak{% else %}Ya{% endif %}</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">Riwayat Gangguan Mental</p>
+                            <p class="text-lg font-semibold text-gray-800">{% if riwayat_gangguan_mental == '0' %}Tidak{% else %}Ya{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">💡 Rekomendasi</h3>
+                    <div class="space-y-3">
+                        {% if prediction == 0 %}
+                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-semibold text-green-800">✓ Pertahankan Rutinitas Sehat</p>
+                                <p class="text-green-700 text-sm">Terus jaga pola tidur, pola makan, dan olahraga teratur</p>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-semibold text-green-800">✓ Manajemen Stres</p>
+                                <p class="text-green-700 text-sm">Gunakan teknik mindfulness, meditasi, atau hobi untuk mengurangi stres</p>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-semibold text-green-800">✓ Dukungan Sosial</p>
+                                <p class="text-green-700 text-sm">Tetap terhubung dengan teman dan keluarga untuk dukungan emosional</p>
+                            </div>
+                        {% else %}
+                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-semibold text-red-800">⚠️ Segera Cari Bantuan Profesional</p>
+                                <p class="text-red-700 text-sm">Konsultasikan dengan psikolog atau profesional kesehatan mental untuk diagnosis dan terapi yang tepat</p>
+                            </div>
+                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-semibold text-red-800">⚠️ Tingkatkan Istirahat</p>
+                                <p class="text-red-700 text-sm">Pastikan tidur cukup (7-9 jam) dan istirahat yang berkualitas</p>
+                            </div>
+                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-semibold text-red-800">⚠️ Kurangi Stres Akademik</p>
+                                <p class="text-red-700 text-sm">Coba kelola beban akademik, minta bantuan dari dosen, atau pertimbangkan mengurangi beban kuliah</p>
+                            </div>
+                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-semibold text-red-800">⚠️ Cari Dukungan Sosial</p>
+                                <p class="text-red-700 text-sm">Berbagi keluhan dengan teman, keluarga, atau bergabung dengan support group</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Emergency Info -->
+                <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg mb-8">
+                    <p class="font-bold text-yellow-800 mb-2">🆘 Jika Anda Dalam Keadaan Darurat:</p>
+                    <p class="text-yellow-700 text-sm">
+                        Jika Anda memiliki pikiran bunuh diri atau berada dalam krisis, segera hubungi:
+                    </p>
+                    <ul class="text-yellow-700 text-sm mt-2 space-y-1">
+                        <li>• Layanan Kesehatan Mental: Hubungi hotline kesehatan mental di daerah Anda</li>
+                        <li>• Nomor Darurat: 112</li>
+                        <li>• Berkonsultasi ke rumah sakit atau klinik kesehatan terdekat</li>
+                    </ul>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col md:flex-row gap-4">
+                    <a href="/predict" class="flex-1 text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                        Prediksi Lagi
+                    </a>
+                    <a href="/" class="flex-1 text-center bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                        Kembali ke Home
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer Box -->
+        <div class="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 mb-8">
+            <p class="text-red-800 text-sm">
+                <strong>⚠️ Disclaimer:</strong> Hasil ini hanya untuk self-assessment edukasi, bukan diagnosis resmi. Konsultasikan dengan profesional kesehatan mental untuk diagnosis akurat.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-600 mt-12 pb-8">
+            <div class="mb-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg inline-block">
+                <p class="text-sm text-red-700">
+                    📌 <strong>Disclaimer Penting:</strong> Website ini adalah untuk tujuan edukasi dan self-assessment saja. 
+                    Hasil prediksi bukan diagnosis resmi dari profesional kesehatan mental dan tidak dapat menggantikan konsultasi langsung dengan profesional.
+                </p>
+            </div>
+            <p class="text-sm">&copy; 2025 PikiranSehat. Dibuat untuk kesadaran kesehatan mental mahasiswa.</p>
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

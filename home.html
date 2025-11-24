@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Kesehatan Mental Mahasiswa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=123456">
+</head>
+
+<!-- Intro Screen -->
+<div id="intro-screen" class="fixed inset-0 flex items-center justify-center bg-white/80 backdrop-blur-xl z-[9999] opacity-100 transition-opacity duration-700">
+    <div class="text-center relative">
+        <img src="{{ url_for('static', filename='maskot.png') }}" class="intro-mascot" alt="Maskot PikiranSehat">
+        
+        <!-- Background Shapes -->
+        <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-pink-300 to-purple-300 rounded-full blur-3xl opacity-40 animate-slowFloat"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-blue-300 to-indigo-300 rounded-full blur-3xl opacity-40 animate-slowFloat" style="animation-delay: 1s;"></div>
+        
+        <!-- Floating Icons -->
+        <div class="absolute top-32 left-1/4 text-4xl opacity-50 animate-floatIcon">🌿</div>
+        <div class="absolute top-40 right-1/4 text-4xl opacity-50 animate-floatIconDelay1">✨</div>
+        <div class="absolute bottom-32 left-1/3 text-4xl opacity-50 animate-floatIconDelay2">💬</div>
+        
+        <h1 class="text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent mb-6 animate-fadeIn">PikiranSehat</h1>
+        <button onclick="enterSite()" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition transform shadow-2xl animate-fadeIn">
+            Mulai
+        </button>
+    </div>
+</div>
+
+<script>
+function enterSite() {
+    const intro = document.getElementById('intro-screen');
+    intro.style.opacity = '0';
+    setTimeout(() => {
+        intro.style.display = 'none';
+    }, 700);
+}
+</script>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation - Sticky -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl sm:text-2xl font-bold text-indigo-600">PikiranSehat</h1>
+                <div class="flex gap-2 sm:gap-3">
+                    <a href="/" class="bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm sm:text-base font-semibold">Home</a>
+                    <a href="/predict" class="bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm sm:text-base font-semibold">Prediksi</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header Hero dengan Background Gradient -->
+        <div class="bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 rounded-3xl shadow-2xl p-8 md:p-12 mb-12 text-white overflow-hidden relative">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8 relative z-10">
+                <!-- Maskot dengan Efek Modern -->
+                <div class="flex-shrink-0 transform hover:scale-105 transition duration-300">
+                    <div class="bg-white p-4 md:p-6 rounded-3xl shadow-2xl border-4 border-white/30 backdrop-blur-sm">
+                        <img src="{{ url_for('static', filename='maskot.png') }}" alt="Maskot PikiranSehat" class="w-32 h-32 md:w-48 md:h-48 object-contain">
+                    </div>
+                </div>
+                
+                <!-- Text Content dengan Styling Lebih Menarik -->
+                <div class="flex-1 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-full mb-3 md:mb-4 text-xs md:text-sm">
+                        <span class="text-lg md:text-2xl">✨</span>
+                        <span class="font-semibold">Platform Self-Assessment Terpercaya</span>
+                    </div>
+                    
+                    <div class="mb-3 md:mb-4">
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2 drop-shadow-lg break-words">
+                            🧠 PikiranSehat
+                        </h1>
+                        <div class="h-1 w-24 md:w-32 bg-white/50 rounded-full mb-3 md:mb-4 mx-auto md:mx-0"></div>
+                    </div>
+                    
+                    <p class="text-xl sm:text-2xl md:text-3xl font-semibold mb-3 md:mb-4 text-white/95">
+                        Platform Prediksi Kesehatan Mental Mahasiswa
+                    </p>
+                    
+                    <p class="text-base md:text-lg leading-relaxed text-white/90 mb-4 md:mb-6">
+                        Membantu mahasiswa memahami dan memonitor kondisi kesehatan mental dengan algoritma analisis data yang canggih dan akurat. 
+                        Deteksi dini, pencegahan lebih baik! 💙
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start">
+                        <div class="flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-full">
+                            <span class="text-sm md:text-base">⚡</span>
+                            <span class="text-xs md:text-sm font-semibold">Hasil Instan</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-full">
+                            <span class="text-sm md:text-base">🔒</span>
+                            <span class="text-xs md:text-sm font-semibold">Data Aman</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-full">
+                            <span class="text-sm md:text-base">💯</span>
+                            <span class="text-xs md:text-sm font-semibold">100% Gratis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Mengapa Kesehatan Mental Penting?</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Kesehatan mental sama pentingnya dengan kesehatan fisik. PikiranSehat hadir sebagai langkah awal untuk meningkatkan kesadaran diri dan mengambil tindakan pencegahan dini terhadap gangguan kesehatan mental.
+                </p>
+            </div>
+
+            <!-- Key Features dengan Animasi -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">✨ Fitur Unggulan</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl transform hover:scale-105 transition duration-300 shadow-lg hover:shadow-2xl">
+                        <div class="text-4xl mb-3">📋</div>
+                        <h3 class="text-xl font-bold mb-2">Form Lengkap</h3>
+                        <p class="text-blue-100">Formulir komprehensif mencakup semua aspek penting kesehatan mental</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-6 rounded-xl transform hover:scale-105 transition duration-300 shadow-lg hover:shadow-2xl">
+                        <div class="text-4xl mb-3">🔍</div>
+                        <h3 class="text-xl font-bold mb-2">Analisis Mendalam</h3>
+                        <p class="text-indigo-100">Analisis data komprehensif untuk prediksi akurat kesehatan mental Anda</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl transform hover:scale-105 transition duration-300 shadow-lg hover:shadow-2xl">
+                        <div class="text-4xl mb-3">📊</div>
+                        <h3 class="text-xl font-bold mb-2">Hasil Detail</h3>
+                        <p class="text-purple-100">Dapatkan hasil prediksi dengan penjelasan mendalam</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kenapa Peduli Section -->
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl p-8 mb-8 shadow-xl">
+                <h3 class="text-2xl font-bold text-center mb-6">💙 Kenapa Kesehatan Mental Penting?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">🎓</div>
+                        <h4 class="text-xl font-bold mb-2">Mahasiswa Rentan</h4>
+                        <p class="text-blue-100">Tekanan akademik dan sosial membuat mahasiswa berisiko tinggi</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">⏰</div>
+                        <h4 class="text-xl font-bold mb-2">Deteksi Dini</h4>
+                        <p class="text-purple-100">Mengenali gejala lebih awal membantu pencegahan</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">💯</div>
+                        <h4 class="text-xl font-bold mb-2">Gratis & Mudah</h4>
+                        <p class="text-indigo-100">Self-assessment yang mudah diakses kapan saja</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faktor-faktor yang Dinilai -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Faktor-Faktor yang Dinilai</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="flex items-start p-5 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl hover:shadow-lg transition transform hover:-translate-y-1 border border-blue-200">
+                        <span class="text-3xl mr-4">👤</span>
+                        <div>
+                            <h4 class="font-bold text-blue-800 mb-1">Informasi Pribadi</h4>
+                            <p class="text-blue-700 text-sm">Nama, jenis kelamin, dan usia</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start p-5 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl hover:shadow-lg transition transform hover:-translate-y-1 border border-indigo-200">
+                        <span class="text-3xl mr-4">📚</span>
+                        <div>
+                            <h4 class="font-bold text-indigo-800 mb-1">Kehidupan Akademik</h4>
+                            <p class="text-indigo-700 text-sm">Tekanan akademik, kepuasan belajar, dan jam belajar</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start p-5 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl hover:shadow-lg transition transform hover:-translate-y-1 border border-purple-200">
+                        <span class="text-3xl mr-4">😴</span>
+                        <div>
+                            <h4 class="font-bold text-purple-800 mb-1">Gaya Hidup</h4>
+                            <p class="text-purple-700 text-sm">Durasi tidur dan kualitas pola makan</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start p-5 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl hover:shadow-lg transition transform hover:-translate-y-1 border border-pink-200">
+                        <span class="text-3xl mr-4">❤️</span>
+                        <div>
+                            <h4 class="font-bold text-pink-800 mb-1">Kesehatan Mental</h4>
+                            <p class="text-pink-700 text-sm">Pikiran suisidal, stres finansial, riwayat keluarga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Button dengan Efek Lebih Menarik -->
+            <div class="text-center bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-2xl">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">Siap Memahami Kesehatan Mental Anda?</h3>
+                <p class="text-gray-600 mb-6">Hanya butuh 5 menit untuk mengisi formulir dan mendapatkan hasil analisis</p>
+                <a href="/predict" class="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-10 rounded-full transition transform hover:scale-110 shadow-2xl text-lg">
+                    🚀 Mulai Prediksi Sekarang
+                </a>
+                <p class="text-sm text-gray-500 mt-4">💯 100% Gratis • 🔒 Data Aman • ⚡ Hasil Instan</p>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">💡 Tips Menjaga Kesehatan Mental</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex items-start gap-4 p-4 bg-green-50 rounded-xl border border-green-200">
+                    <span class="text-3xl">🏃</span>
+                    <div>
+                        <h4 class="font-bold text-green-800 mb-1">Olahraga Teratur</h4>
+                        <p class="text-green-700 text-sm">Minimal 30 menit per hari dapat meningkatkan mood dan mengurangi stres</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+                    <span class="text-3xl">😴</span>
+                    <div>
+                        <h4 class="font-bold text-yellow-800 mb-1">Tidur Cukup</h4>
+                        <p class="text-yellow-700 text-sm">7-9 jam tidur berkualitas sangat penting untuk kesehatan mental</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                    <span class="text-3xl">👥</span>
+                    <div>
+                        <h4 class="font-bold text-blue-800 mb-1">Hubungan Sosial</h4>
+                        <p class="text-blue-700 text-sm">Jaga komunikasi dengan teman dan keluarga untuk dukungan emosional</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4 p-4 bg-purple-50 rounded-xl border border-purple-200">
+                    <span class="text-3xl">🧘</span>
+                    <div>
+                        <h4 class="font-bold text-purple-800 mb-1">Kelola Stres</h4>
+                        <p class="text-purple-700 text-sm">Praktikkan meditasi, yoga, atau hobi yang menenangkan pikiran</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-600 py-8">
+            <p>&copy; 2025 PikiranSehat. Dibuat untuk kesadaran kesehatan mental mahasiswa.</p>
+            <p class="text-sm mt-2">Disclaimer: Aplikasi ini adalah untuk tujuan edukasi dan self-assessment. Konsultasikan dengan profesional kesehatan mental untuk diagnosis resmi.</p>
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
